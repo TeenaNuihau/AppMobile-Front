@@ -8,7 +8,7 @@ export class GamesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getGames(): {name: String, type: String, zone: String}[] {
+  getGames(): {name: string, type: string, zone: string}[] {
     return [
       {
         name: 'Jeu enfant',

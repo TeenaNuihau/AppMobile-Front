@@ -1,11 +1,11 @@
 <h2> List of games </h2>
 
-<table>
+<table id="myTable">
     <tr>
-        <td><b> Name </b></td>
-        <td><b> Type </b></td>
-        <td><b> Zone </b></td>
-        <td><b> Actions </b></td>
+        <th [ngClass]="{pointer: true, active:column=='name',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('name')"> Name </th>
+        <th [ngClass]="{pointer: true, active:column=='type',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('type')"> Type </th>
+        <th [ngClass]="{pointer: true, active:column=='zone',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('zone')"> Zone </th>
+        <th> Actions </th>
     </tr>
     <tr *ngFor="let game of games; let i = index">
         <td *ngIf="enableEditIndex != i">{{ game.name }}</td>
@@ -15,10 +15,30 @@
             <input id="gameName" type="text" [value]="game.name" />
         </td>
         <td *ngIf="enableEditIndex == i">
-            <input id="gameType" type="text" [value]="game.type" />
+            <input id="gameType" type="text" [placeholder]="game.type" list="listOfTypes">
+            <!-- TODO : REMPLACER AVEC DONNEES BD -->
+                <datalist id="listOfTypes">
+                    <option value="enfant">
+                    <option value="famille">
+                    <option value="ambiance">
+                    <option value="initié">
+                    <option value="expert">
+                </datalist>
         </td>
         <td *ngIf="enableEditIndex == i">
-            <input id="gameZone" type="text" [value]="game.zone" />
+            <input id="gameZone" type="text" [placeholder]="game.zone" list="listOfZones">
+            <!-- TODO : REMPLACER AVEC DONNEES BD -->
+                <datalist id="listOfZones">
+                    <option value="Esplanade-Gauche 1, 2, 3">
+                    <option value="Esplanade-Centre 1, 2, 3, 4, 5">
+                    <option value="Esplanade-Droite 1, 2, 3, 4">
+                    <option value="Esplanade-Accueil">
+                    <option value="Antigone-Buvette">
+                    <option value="Antigone-Entrée 1, 2, 3, 4, 5">
+                    <option value="Antigone-Fond 1, 2">
+                    <option value="Antigone-Proto">
+                    <option value="Antigone-Loup-Garous">
+                </datalist>
         </td>
         <td>
             <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
