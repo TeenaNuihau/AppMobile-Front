@@ -1,34 +1,38 @@
 <h2> List of volunteers </h2>
 
-<table id="myTable">
-    <tr>
-        <th [ngClass]="{pointer: true, active:column=='firstname',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('firstname')"> Firstname </th>
-        <th [ngClass]="{pointer: true, active:column=='lastname',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('lastname')"> Lastname </th>
-        <th> Email </th>
-        <th> Actions </th>
-    </tr>
-    <tr *ngFor="let volunteer of volunteers; let i = index">
-        <td *ngIf="enableEditIndex != i">{{ volunteer.firstname }}</td>
-        <td *ngIf="enableEditIndex != i">{{ volunteer.lastname }}</td>
-        <td *ngIf="enableEditIndex != i">{{ volunteer.email }}</td>
-        <td *ngIf="enableEditIndex == i">
-            <input id="volunteerFirstname" type="text" [value]="volunteer.firstname" />
-        </td>
-        <td *ngIf="enableEditIndex == i">
-            <input id="volunteerLastname" type="text" [value]="volunteer.lastname" />
-        </td>
-        <td *ngIf="enableEditIndex == i">
-            <input id="volunteerEmail" type="text" [value]="volunteer.email" />
-        </td>
-        <td>
-            <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
-            <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveVolunteer(i); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
-            <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod(i)">
-                edit
-            </button>
-            <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeVolunteer(i)">
-                remove
-            </button>
-        </td>
-    </tr>
+<table id="myTable" class="styled-table">
+    <thead>
+        <tr>
+            <th [ngClass]="{pointer: true, active:column=='firstname',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('firstname')"> Firstname </th>
+            <th [ngClass]="{pointer: true, active:column=='lastname',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('lastname')"> Lastname </th>
+            <th> Email </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let volunteer of volunteers; let i = index">
+            <td *ngIf="enableEditIndex != i">{{ volunteer.firstname }}</td>
+            <td *ngIf="enableEditIndex != i">{{ volunteer.lastname }}</td>
+            <td *ngIf="enableEditIndex != i">{{ volunteer.email }}</td>
+            <td *ngIf="enableEditIndex == i">
+                <input id="volunteerFirstname" type="text" [value]="volunteer.firstname" />
+            </td>
+            <td *ngIf="enableEditIndex == i">
+                <input id="volunteerLastname" type="text" [value]="volunteer.lastname" />
+            </td>
+            <td *ngIf="enableEditIndex == i">
+                <input id="volunteerEmail" type="text" [value]="volunteer.email" />
+            </td>
+            <td>
+                <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
+                <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveVolunteer(i); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
+                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod(i)">
+                    edit
+                </button>
+                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeVolunteer(i)">
+                    remove
+                </button>
+            </td>
+        </tr>
+    </tbody>
 </table>

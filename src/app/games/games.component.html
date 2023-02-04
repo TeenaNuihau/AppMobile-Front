@@ -1,54 +1,58 @@
 <h2> List of games </h2>
 
-<table id="myTable">
-    <tr>
-        <th [ngClass]="{pointer: true, active:column=='name',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('name')"> Name </th>
-        <th [ngClass]="{pointer: true, active:column=='type',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('type')"> Type </th>
-        <th [ngClass]="{pointer: true, active:column=='zone',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('zone')"> Zone </th>
-        <th> Actions </th>
-    </tr>
-    <tr *ngFor="let game of games; let i = index">
-        <td *ngIf="enableEditIndex != i">{{ game.name }}</td>
-        <td *ngIf="enableEditIndex != i">{{ game.type }}</td>
-        <td *ngIf="enableEditIndex != i">{{ game.zone }}</td>
-        <td *ngIf="enableEditIndex == i">
-            <input id="gameName" type="text" [value]="game.name" />
-        </td>
-        <td *ngIf="enableEditIndex == i">
-            <input id="gameType" type="text" [placeholder]="game.type" list="listOfTypes">
-            <!-- TODO : REMPLACER AVEC DONNEES BD -->
-                <datalist id="listOfTypes">
-                    <option value="enfant">
-                    <option value="famille">
-                    <option value="ambiance">
-                    <option value="initié">
-                    <option value="expert">
-                </datalist>
-        </td>
-        <td *ngIf="enableEditIndex == i">
-            <input id="gameZone" type="text" [placeholder]="game.zone" list="listOfZones">
-            <!-- TODO : REMPLACER AVEC DONNEES BD -->
-                <datalist id="listOfZones">
-                    <option value="Esplanade-Gauche 1, 2, 3">
-                    <option value="Esplanade-Centre 1, 2, 3, 4, 5">
-                    <option value="Esplanade-Droite 1, 2, 3, 4">
-                    <option value="Esplanade-Accueil">
-                    <option value="Antigone-Buvette">
-                    <option value="Antigone-Entrée 1, 2, 3, 4, 5">
-                    <option value="Antigone-Fond 1, 2">
-                    <option value="Antigone-Proto">
-                    <option value="Antigone-Loup-Garous">
-                </datalist>
-        </td>
-        <td>
-            <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
-            <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveGame(i); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
-            <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod(i)">
-                edit
-            </button>
-            <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeGame(i)">
-                remove
-            </button>
-        </td>
-    </tr>
+<table id="myTable" class="styled-table">
+    <thead>
+        <tr>
+            <th [ngClass]="{pointer: true, active:column=='name',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('name')"> Name </th>
+            <th [ngClass]="{pointer: true, active:column=='type',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('type')"> Type </th>
+            <th [ngClass]="{pointer: true, active:column=='zone',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('zone')"> Zone </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let game of games; let i = index">
+            <td *ngIf="enableEditIndex != i">{{ game.name }}</td>
+            <td *ngIf="enableEditIndex != i">{{ game.type }}</td>
+            <td *ngIf="enableEditIndex != i">{{ game.zone }}</td>
+            <td *ngIf="enableEditIndex == i">
+                <input id="gameName" type="text" [value]="game.name" />
+            </td>
+            <td *ngIf="enableEditIndex == i">
+                <input id="gameType" type="text" [placeholder]="game.type" list="listOfTypes">
+                <!-- TODO : REMPLACER AVEC DONNEES BD -->
+                    <datalist id="listOfTypes">
+                        <option value="enfant">
+                        <option value="famille">
+                        <option value="ambiance">
+                        <option value="initié">
+                        <option value="expert">
+                    </datalist>
+            </td>
+            <td *ngIf="enableEditIndex == i">
+                <input id="gameZone" type="text" [placeholder]="game.zone" list="listOfZones">
+                <!-- TODO : REMPLACER AVEC DONNEES BD -->
+                    <datalist id="listOfZones">
+                        <option value="Esplanade-Gauche 1, 2, 3">
+                        <option value="Esplanade-Centre 1, 2, 3, 4, 5">
+                        <option value="Esplanade-Droite 1, 2, 3, 4">
+                        <option value="Esplanade-Accueil">
+                        <option value="Antigone-Buvette">
+                        <option value="Antigone-Entrée 1, 2, 3, 4, 5">
+                        <option value="Antigone-Fond 1, 2">
+                        <option value="Antigone-Proto">
+                        <option value="Antigone-Loup-Garous">
+                    </datalist>
+            </td>
+            <td>
+                <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
+                <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveGame(i); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
+                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod(i)">
+                    edit
+                </button>
+                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeGame(i)">
+                    remove
+                </button>
+            </td>
+        </tr>
+    </tbody>
 </table>
