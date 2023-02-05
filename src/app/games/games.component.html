@@ -6,6 +6,9 @@
             <th [ngClass]="{pointer: true, active:column=='name',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('name')"> Name </th>
             <th [ngClass]="{pointer: true, active:column=='type',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('type')"> Type </th>
             <th [ngClass]="{pointer: true, active:column=='zone',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('zone')"> Zone </th>
+            <th> Date </th>
+            <th> Start Hour </th>
+            <th> End Hour </th>
             <th> Actions </th>
         </tr>
     </thead>
@@ -14,6 +17,9 @@
             <td *ngIf="enableEditIndex != i">{{ game.name }}</td>
             <td *ngIf="enableEditIndex != i">{{ game.type }}</td>
             <td *ngIf="enableEditIndex != i">{{ game.zone }}</td>
+            <td *ngIf="enableEditIndex != i">{{ game.date }}</td>
+            <td *ngIf="enableEditIndex != i">{{ game.start }}</td>
+            <td *ngIf="enableEditIndex != i">{{ game.end }}</td>
             <td *ngIf="enableEditIndex == i">
                 <input id="gameName" type="text" [value]="game.name" />
             </td>
@@ -42,6 +48,15 @@
                         <option value="Antigone-Proto">
                         <option value="Antigone-Loup-Garous">
                     </datalist>
+            </td>
+            <td *ngIf="enableEditIndex == i">
+                <input id="gameDate" type="date" [value]="game.date" required pattern="\d{2}-\d{2}-\d{4}" />
+            </td>
+            <td *ngIf="enableEditIndex == i">
+                <input #gameStart id="gameStart" type="time" [value]="game.start" />
+            </td>
+            <td *ngIf="enableEditIndex == i">
+                <input #gameEnd id="gameEnd" type="time" [value]="game.end" />
             </td>
             <td>
                 <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
