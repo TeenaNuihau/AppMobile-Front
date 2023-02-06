@@ -1,3 +1,18 @@
+<h2> Create a volunteer </h2>
+<form [formGroup]="newVolunteerForm" (ngSubmit)="onSubmit()" >
+
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+  
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+
+    <label for="email">Email: </label>
+    <input id="email" type="text" formControlName="email">
+    
+    <button type="submit" [disabled]="!newVolunteerForm.valid">Submit</button>
+</form>
+
 <h2> List of volunteers </h2>
 
 <table id="myTable" class="styled-table">

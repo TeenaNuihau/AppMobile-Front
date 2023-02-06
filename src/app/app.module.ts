@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { GamesComponent } from './games/games.component';
 import { VolunteersComponent } from './volunteers/volunteers.component'
 import { VolunteersService } from './services/volunteers.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { VolunteersService } from './services/volunteers.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {
         path: '',

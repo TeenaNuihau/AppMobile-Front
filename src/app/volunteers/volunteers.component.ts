@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { VolunteersService } from '../services/volunteers.service';
 
 @Component({
@@ -12,12 +13,28 @@ export class VolunteersComponent {
   public enableEditIndex : number | null = null;
   public column: string = "firstname";
   public isDesc: boolean = false;
+  newVolunteerForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+  });
 
-  constructor (private volunteersService : VolunteersService) {
+  constructor (private volunteersService : VolunteersService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.volunteers = this.volunteersService.getVolunteers();
+  }
+
+  public onSubmit(): void {
+    const volunteerFirstname = this.newVolunteerForm.value.firstName;
+    const volunteerLastname = this.newVolunteerForm.value.lastName;
+    const volunteerEmail = this.newVolunteerForm.value.email;
+    if (volunteerFirstname != null && volunteerLastname != null && volunteerEmail != null) {
+      const volunteerToAdd = { firstname: volunteerFirstname, lastname: volunteerLastname, email: volunteerEmail };
+      this.volunteers.push(volunteerToAdd);
+    }
+    this.newVolunteerForm.reset();
   }
 
   public saveVolunteer(i: number) : void {

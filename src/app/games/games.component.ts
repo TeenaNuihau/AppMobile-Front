@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { GamesService } from '../services/games.service';
 
 @Component({
@@ -12,13 +13,28 @@ export class GamesComponent {
   public enableEditIndex : number | null = null;
   public column: string = "name";
   public isDesc: boolean = false;
+  newGameForm = this.fb.group({
+    name: ['', Validators.required],
+    type: ['', Validators.required],
+  });
 
-  constructor (private gamesService : GamesService) {
+  constructor (private gamesService : GamesService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.games = this.gamesService.getGames();
   }
+
+  public onSubmit(): void {
+    const gameName = this.newGameForm.value.name;
+    const gameType = this.newGameForm.value.type;
+    if (gameName != null && gameType != null) {
+      const gameToAdd = { name: gameName, type: gameType, zone: '', date: '', start: '', end: '' };
+      this.games.push(gameToAdd);
+    }
+    this.newGameForm.reset();
+  }
+
 
   public saveGame(i: number) : void {
     const nameInput = document.getElementById("gameName") as HTMLInputElement;
