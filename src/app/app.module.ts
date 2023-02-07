@@ -11,13 +11,15 @@ import { GamesComponent } from './games/games.component';
 import { VolunteersComponent } from './volunteers/volunteers.component'
 import { VolunteersService } from './services/volunteers.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AffectationsComponent } from './affectations/affectations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     GamesComponent,
-    VolunteersComponent
+    VolunteersComponent,
+    AffectationsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       {
         path: 'volunteers',
         component: VolunteersComponent
-      }
+      },
+      {
+        path: 'affectations',
+        component: AffectationsComponent
+      },
     ])
   ],
   providers: [GamesService, VolunteersService],

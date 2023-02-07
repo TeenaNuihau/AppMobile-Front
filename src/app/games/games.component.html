@@ -65,10 +65,10 @@
                 <input id="gameDate" type="date" [value]="game.date" required pattern="\d{2}-\d{2}-\d{4}" />
             </td>
             <td *ngIf="enableEditIndex == i">
-                <input #gameStart id="gameStart" type="time" [value]="game.start" />
+                <input id="gameStart" type="time" [value]="game.start" />
             </td>
             <td *ngIf="enableEditIndex == i">
-                <input #gameEnd id="gameEnd" type="time" [value]="game.end" />
+                <input id="gameEnd" type="time" [value]="game.end" />
             </td>
             <td>
                 <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
