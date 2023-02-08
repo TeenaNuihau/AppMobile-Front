@@ -1,3 +1,18 @@
+<ul class="navbar">
+    <li>
+        <a routerLink="/"> Home </a>
+    </li>
+    <li>
+        <a routerLink="/games"> Games </a>
+    </li>
+    <li>
+        <a class="active" routerLink="/volunteers"> Volunteers </a>
+    </li>
+    <li>
+        <a routerLink="/affectations"> Planning </a>
+    </li>
+</ul>
+
 <h2> Create a volunteer </h2>
 <form [formGroup]="newVolunteerForm" (ngSubmit)="onSubmit()" >
 

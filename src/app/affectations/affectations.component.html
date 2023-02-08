@@ -1,58 +1,78 @@
-<h2> Make an affectation </h2>
-<form [formGroup]="affectationForm" (ngSubmit)="onSubmit()" >
+<router-outlet></router-outlet>
+<ul class="navbar">
+  <li>
+    <a routerLink="/"> Home </a>
+  </li>
+  <li>
+    <a routerLink="/games"> Games </a>
+  </li>
+  <li>
+    <a routerLink="/volunteers"> Volunteers </a>
+  </li>
+  <li>
+    <a class="active" routerLink="/affectations"> Planning </a>
+  </li>
+</ul>
 
-    <label for="zone">Zone: </label>
-    <input id="zone" type="text" list="listOfZones" formControlName="zone">
-        <!-- TODO : REMPLACER AVEC DONNEES BD -->
-        <datalist id="listOfZones">
-            <option value="Esplanade-Gauche 1, 2, 3">
-            <option value="Esplanade-Centre 1, 2, 3, 4, 5">
-            <option value="Esplanade-Droite 1, 2, 3, 4">
-            <option value="Esplanade-Accueil">
-            <option value="Antigone-Buvette">
-            <option value="Antigone-Entrée 1, 2, 3, 4, 5">
-            <option value="Antigone-Fond 1, 2">
-            <option value="Antigone-Proto">
-            <option value="Antigone-Loup-Garous">
-        </datalist>
-  
-    <label for="date">Date: </label>
-    <input id="date" type="date" formControlName="date">
+<body>
 
-    <label for="start">Start hour: </label>
-    <input id="start" type="time" required pattern="\d{2}-\d{2}-\d{4}" formControlName="start">
+    <h2> Make an affectation </h2>
+    <form [formGroup]="affectationForm" (ngSubmit)="onSubmit()" >
 
-    <label for="end">End hour: </label>
-    <input id="end" type="time" required pattern="\d{2}-\d{2}-\d{4}" formControlName="end">
-  
-    <label for="game">Game: </label>
-    <input id="game" type="text" list="listOfGames" formControlName="game">
-        <!-- TODO : REMPLACER AVEC DONNEES BD -->
-        <datalist id="listOfGames">
-            <option *ngFor="let game of games" [value]="game.name">
-        </datalist>
-
-    <label for="volunteers">Volunteers: </label>
-    <input id="volunteers" type="text" list="listOfVolunteers" formControlName="volunteers">
-        <!-- TODO : REMPLACER AVEC DONNEES BD -->
-        <datalist id="listOfVolunteers">
-            <option *ngFor="let volunteer of volunteers" [value]="volunteer.firstname + ' ' + volunteer.lastname">
-        </datalist>
+        <label for="zone">Zone: </label>
+        <input id="zone" type="text" list="listOfZones" formControlName="zone">
+            <!-- TODO : REMPLACER AVEC DONNEES BD -->
+            <datalist id="listOfZones">
+                <option value="Esplanade-Gauche 1, 2, 3">
+                <option value="Esplanade-Centre 1, 2, 3, 4, 5">
+                <option value="Esplanade-Droite 1, 2, 3, 4">
+                <option value="Esplanade-Accueil">
+                <option value="Antigone-Buvette">
+                <option value="Antigone-Entrée 1, 2, 3, 4, 5">
+                <option value="Antigone-Fond 1, 2">
+                <option value="Antigone-Proto">
+                <option value="Antigone-Loup-Garous">
+            </datalist>
     
-    <button type="submit" [disabled]="!affectationForm.valid">Submit</button>
-</form>
+        <label for="date">Date: </label>
+        <input id="date" type="date" formControlName="date">
 
-<h2> List of volunteers </h2>
+        <label for="start">Start hour: </label>
+        <input id="start" type="time" required pattern="\d{2}-\d{2}-\d{4}" formControlName="start">
 
-<table id="myTable" class="styled-table">
-    <thead>
-        <tr>
-            <th> Actions </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let affectation of affectations; let i = index">
-            <td>{{ affectation.zone }}</td>
-        </tr>
-    </tbody>
-</table>
+        <label for="end">End hour: </label>
+        <input id="end" type="time" required pattern="\d{2}-\d{2}-\d{4}" formControlName="end">
+    
+        <label for="game">Game: </label>
+        <input id="game" type="text" list="listOfGames" formControlName="game">
+            <!-- TODO : REMPLACER AVEC DONNEES BD -->
+            <datalist id="listOfGames">
+                <option *ngFor="let game of games" [value]="game.name">
+            </datalist>
+
+        <label for="volunteers">Volunteers: </label>
+        <input id="volunteers" type="text" list="listOfVolunteers" formControlName="volunteers">
+            <!-- TODO : REMPLACER AVEC DONNEES BD -->
+            <datalist id="listOfVolunteers">
+                <option *ngFor="let volunteer of volunteers" [value]="volunteer.firstname + ' ' + volunteer.lastname">
+            </datalist>
+        
+        <button type="submit" [disabled]="!affectationForm.valid">Submit</button>
+    </form>
+
+    <h2> Planning </h2>
+
+    <table id="myTable" class="styled-table">
+        <thead>
+            <tr>
+                <th> Actions </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let affectation of affectations; let i = index">
+                <td>{{ affectation.zone }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
