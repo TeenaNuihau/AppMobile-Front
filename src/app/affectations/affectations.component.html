@@ -51,13 +51,18 @@
             </datalist>
 
         <label for="volunteers">Volunteers: </label>
-        <input id="volunteers" type="text" list="listOfVolunteers" formControlName="volunteers">
-            <!-- TODO : REMPLACER AVEC DONNEES BD -->
-            <datalist id="listOfVolunteers">
-                <option *ngFor="let volunteer of volunteers" [value]="volunteer.firstname + ' ' + volunteer.lastname">
-            </datalist>
+        <select formControlName="volunteers" [(ngModel)]="selectedVolunteer">
+            <option *ngFor="let volunteer of volunteers" [ngValue]="volunteer.email">{{ volunteer.firstname + ' ' + volunteer.lastname }}</option>
+        </select>
+        <button type="button" (click)="addToList()">Add</button>
+        <ul>
+            <li *ngFor="let item of list">
+                {{ item }}
+                <button type="button" (click)="removeVolunteer(item)"> X </button>
+            </li>
+        </ul>
         
-        <button type="submit" [disabled]="!affectationForm.valid">Submit</button>
+        <button id="submitButton" type="submit" [disabled]="affectationForm.controls.zone.value === '' || affectationForm.controls.date.value === '' || affectationForm.controls.start.value === '' || affectationForm.controls.end.value === '' || affectationForm.controls.game.value === ''">Submit</button>
     </form>
 
     <h2> Planning </h2>
@@ -65,12 +70,23 @@
     <table id="myTable" class="styled-table">
         <thead>
             <tr>
+                <th> Zone </th>
+                <th> Date </th>
+                <th> Start Hour </th>
+                <th> End Hour </th>
+                <th> Game </th>
+                <th> Volunteers </th>
                 <th> Actions </th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let affectation of affectations; let i = index">
                 <td>{{ affectation.zone }}</td>
+                <td>{{ affectation.date }}</td>
+                <td>{{ affectation.start }}</td>
+                <td>{{ affectation.end}}</td>
+                <td>{{ affectation.game }}</td>
+                <td>{{ affectation.volunteers }}</td>
             </tr>
         </tbody>
     </table>
