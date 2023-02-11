@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class VolunteersService {
 
+  private endpoint: string = 'http://localhost:3000/benevole'
+
   constructor(private httpClient: HttpClient) { }
 
   getVolunteers(): {firstname: string, lastname: string, email: string}[] {
@@ -26,5 +28,10 @@ export class VolunteersService {
         email: 'benevole3@mail.fr',
       },
     ]
+  }
+
+  getVolunteersFromAPI() {
+    let options = {};
+    return this.httpClient.get(this.endpoint, options);
   }
 }

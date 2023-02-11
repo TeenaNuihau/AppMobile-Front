@@ -12,6 +12,8 @@ import { VolunteersComponent } from './volunteers/volunteers.component'
 import { VolunteersService } from './services/volunteers.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AffectationsComponent } from './affectations/affectations.component';
+import { AffectationsService } from './services/affectations.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { AffectationsComponent } from './affectations/affectations.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -46,7 +49,7 @@ import { AffectationsComponent } from './affectations/affectations.component';
       },
     ])
   ],
-  providers: [GamesService, VolunteersService],
+  providers: [GamesService, VolunteersService, AffectationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

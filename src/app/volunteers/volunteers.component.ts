@@ -5,7 +5,7 @@ import { VolunteersService } from '../services/volunteers.service';
 @Component({
   selector: 'app-volunteers',
   templateUrl: './volunteers.component.html',
-  styleUrls: ['./volunteers.component.css']
+  styleUrls: ['./volunteers.component.css'],
 })
 export class VolunteersComponent {
   public volunteers : {firstname: string, lastname: string, email: string}[] = [];
@@ -22,8 +22,16 @@ export class VolunteersComponent {
   constructor (private volunteersService : VolunteersService, private fb: FormBuilder) {
   }
 
-  ngOnInit() {
-    this.volunteers = this.volunteersService.getVolunteers();
+  ngOnInit(): void {
+    // this.volunteers = this.volunteersService.getVolunteers();
+    this.getVolonteersList();
+  }
+
+  public getVolonteersList() {
+    this.volunteersService.getVolunteersFromAPI().subscribe(res => {
+      this.volunteers = res as {firstname: string, lastname: string, email: string}[];
+      console.log(this.volunteers);
+    })
   }
 
   public onSubmit(): void {
@@ -54,6 +62,7 @@ export class VolunteersComponent {
     this.enableEdit = true;
   }
 
+  
   public sort(property: string) {
     this.isDesc = !this.isDesc; //change the direction
     this.column = property;
