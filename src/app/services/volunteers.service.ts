@@ -10,28 +10,20 @@ export class VolunteersService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getVolunteers(): {firstname: string, lastname: string, email: string}[] {
-    return [
-      {
-        firstname: 'bene',
-        lastname: 'vole 1',
-        email: 'benevole1@mail.fr',
-      },
-      {
-        firstname: 'bene',
-        lastname: 'vole 2',
-        email: 'benevole2@mail.fr',
-      },
-      {
-        firstname: 'bene',
-        lastname: 'vole 3',
-        email: 'benevole3@mail.fr',
-      },
-    ]
-  }
-
-  getVolunteersFromAPI() {
+  public getVolunteers() {
     let options = {};
     return this.httpClient.get(this.endpoint, options);
+  }
+
+  public deleteVolunteer(volunteer: any) {
+    return this.httpClient.delete(this.endpoint, volunteer);
+  }
+
+  public editVolunteer(volunteer: any) {
+    return this.httpClient.patch(this.endpoint, volunteer);
+  }
+
+  public addVolunteer(volunteer: any) {
+    return this.httpClient.post(this.endpoint, volunteer);
   }
 }

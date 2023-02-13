@@ -17,15 +17,15 @@
 <form [formGroup]="newVolunteerForm" (ngSubmit)="onSubmit()" >
 
     <label for="first-name">First Name: </label>
-    <input id="first-name" type="text" formControlName="firstName">
+    <input id="first-name" type="text" formControlName="prenom">
   
     <label for="last-name">Last Name: </label>
-    <input id="last-name" type="text" formControlName="lastName">
+    <input id="last-name" type="text" formControlName="nom">
 
     <label for="email">Email: </label>
     <input id="email" type="text" formControlName="email">
     
-    <button type="submit" [disabled]="!newVolunteerForm.valid">Submit</button>
+    <button type="submit" [disabled]="formNotValid()">Submit</button>
 </form>
 
 <h2> List of volunteers </h2>
@@ -33,22 +33,22 @@
 <table id="myTable" class="styled-table">
     <thead>
         <tr>
-            <th [ngClass]="{pointer: true, active:column=='firstname',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('firstname')"> Firstname </th>
-            <th [ngClass]="{pointer: true, active:column=='lastname',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('lastname')"> Lastname </th>
+            <th [ngClass]="{pointer: true, active:column=='prenom',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('prenom')"> First Name </th>
+            <th [ngClass]="{pointer: true, active:column=='nom',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('nom')"> Last Name </th>
             <th> Email </th>
             <th> Actions </th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let volunteer of volunteers; let i = index">
-            <td *ngIf="enableEditIndex != i">{{ volunteer.firstname }}</td>
-            <td *ngIf="enableEditIndex != i">{{ volunteer.lastname }}</td>
+            <td *ngIf="enableEditIndex != i">{{ volunteer.prenom }}</td>
+            <td *ngIf="enableEditIndex != i">{{ volunteer.nom }}</td>
             <td *ngIf="enableEditIndex != i">{{ volunteer.email }}</td>
             <td *ngIf="enableEditIndex == i">
-                <input id="volunteerFirstname" type="text" [value]="volunteer.firstname" />
+                <input id="volunteerprenom" type="text" [value]="volunteer.prenom" />
             </td>
             <td *ngIf="enableEditIndex == i">
-                <input id="volunteerLastname" type="text" [value]="volunteer.lastname" />
+                <input id="volunteernom" type="text" [value]="volunteer.nom" />
             </td>
             <td *ngIf="enableEditIndex == i">
                 <input id="volunteerEmail" type="text" [value]="volunteer.email" />

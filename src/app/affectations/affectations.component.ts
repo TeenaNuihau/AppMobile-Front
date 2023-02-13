@@ -11,8 +11,8 @@ import { VolunteersService } from '../services/volunteers.service';
 })
 export class AffectationsComponent {
   public affectations : {zone: string, date: string, start: string, end: string, game: string, volunteers: string[]}[] = [];
-  public games : {name: string, type: string, zone: string, date: string, start: string, end: string}[] = [];
-  public volunteers : {firstname: string, lastname: string, email: string}[] = [];
+  public games : {nom: string, type: string}[] = [];
+  public volunteers : {prenom: string, nom: string, email: string}[] = [];
   public affectationForm = this.fb.group({
     zone: ['', Validators.required],
     date: ['', Validators.required],
@@ -33,8 +33,12 @@ export class AffectationsComponent {
 
   ngOnInit() {
     this.affectations = this.affectationsService.getAffectations();
-    this.games = this.gamesService.getGames();
-    this.volunteers = this.volunteersService.getVolunteers();
+    this.gamesService.getGames().subscribe(res => {
+      this.games = res as {nom: string, type: string}[];
+    })
+    this.volunteersService.getVolunteers().subscribe(res => {
+      this.volunteers = res as {prenom: string, nom: string, email: string}[];
+    })
   }
 
   public addToList() {

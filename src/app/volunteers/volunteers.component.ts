@@ -8,14 +8,14 @@ import { VolunteersService } from '../services/volunteers.service';
   styleUrls: ['./volunteers.component.css'],
 })
 export class VolunteersComponent {
-  public volunteers : {firstname: string, lastname: string, email: string}[] = [];
+  public volunteers : {prenom: string, nom: string, email: string}[] = [];
   public enableEdit : boolean = false;
   public enableEditIndex : number | null = null;
-  public column: string = "firstname";
+  public column: string = "prenom";
   public isDesc: boolean = false;
   newVolunteerForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    prenom: ['', Validators.required],
+    nom: ['', Validators.required],
     email: ['', Validators.required],
   });
 
@@ -23,33 +23,31 @@ export class VolunteersComponent {
   }
 
   ngOnInit(): void {
-    // this.volunteers = this.volunteersService.getVolunteers();
     this.getVolonteersList();
   }
 
   public getVolonteersList() {
-    this.volunteersService.getVolunteersFromAPI().subscribe(res => {
-      this.volunteers = res as {firstname: string, lastname: string, email: string}[];
-      console.log(this.volunteers);
+    this.volunteersService.getVolunteers().subscribe(res => {
+      this.volunteers = res as {prenom: string, nom: string, email: string}[];
     })
   }
 
   public onSubmit(): void {
-    const volunteerFirstname = this.newVolunteerForm.value.firstName;
-    const volunteerLastname = this.newVolunteerForm.value.lastName;
+    const volunteerprenom = this.newVolunteerForm.value.prenom;
+    const volunteernom = this.newVolunteerForm.value.nom;
     const volunteerEmail = this.newVolunteerForm.value.email;
-    if (volunteerFirstname != null && volunteerLastname != null && volunteerEmail != null) {
-      const volunteerToAdd = { firstname: volunteerFirstname, lastname: volunteerLastname, email: volunteerEmail };
+    if (volunteerprenom != null && volunteernom != null && volunteerEmail != null) {
+      const volunteerToAdd = { prenom: volunteerprenom, nom: volunteernom, email: volunteerEmail };
       this.volunteers.push(volunteerToAdd);
     }
     this.newVolunteerForm.reset();
   }
 
   public saveVolunteer(i: number) : void {
-    const firstnameInput = document.getElementById("volunteerFirstname") as HTMLInputElement;
-    const lastnameInput = document.getElementById("volunteerLastname") as HTMLInputElement;
+    const prenomInput = document.getElementById("volunteerprenom") as HTMLInputElement;
+    const nomInput = document.getElementById("volunteernom") as HTMLInputElement;
     const emailInput = document.getElementById("volunteerEmail") as HTMLInputElement;
-    const editedVolunteer = { firstname: firstnameInput.value, lastname: lastnameInput.value, email: emailInput.value };
+    const editedVolunteer = { prenom: prenomInput.value, nom: nomInput.value, email: emailInput.value };
     this.volunteers[i] = editedVolunteer;
   }
 
@@ -67,7 +65,7 @@ export class VolunteersComponent {
     this.isDesc = !this.isDesc; //change the direction
     this.column = property;
     let direction = this.isDesc ? 1 : -1;
-    if ( property == "firstname" || property == "lastname")
+    if ( property == "prenom" || property == "nom")
     this.volunteers.sort(function(a, b) {
       if (a[property] < b[property]) {
         return -1 * direction;
@@ -77,5 +75,10 @@ export class VolunteersComponent {
         return 0;
       }
     });
+  }
+
+  public formNotValid() {
+    const emailRegex = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,4}$");
+    return this.newVolunteerForm.value.prenom === '' || this.newVolunteerForm.value.nom === '' || !emailRegex.test(this.newVolunteerForm.value.email!)
   }
 }

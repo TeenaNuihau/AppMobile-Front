@@ -8,13 +8,13 @@ import { GamesService } from '../services/games.service';
   styleUrls: ['./games.component.css']
 })
 export class GamesComponent {
-  public games : {name: string, type: string, zone: string, date: string, start: string, end: string}[] = [];
+  public games : {nom: string, type: string}[] = [];
   public enableEdit : boolean = false;
   public enableEditIndex : number | null = null;
-  public column: string = "name";
+  public column: string = "nom";
   public isDesc: boolean = false;
   newGameForm = this.fb.group({
-    name: ['', Validators.required],
+    nom: ['', Validators.required],
     type: ['', Validators.required],
   });
 
@@ -22,14 +22,20 @@ export class GamesComponent {
   }
 
   ngOnInit() {
-    this.games = this.gamesService.getGames();
+    this.getGamesList();
+  }
+
+  public getGamesList() {
+    this.gamesService.getGames().subscribe(res => {
+      this.games = res as {nom: string, type: string}[];
+    })
   }
 
   public onSubmit(): void {
-    const gameName = this.newGameForm.value.name;
+    const gameName = this.newGameForm.value.nom;
     const gameType = this.newGameForm.value.type;
     if (gameName != null && gameType != null) {
-      const gameToAdd = { name: gameName, type: gameType, zone: '', date: '', start: '', end: '' };
+      const gameToAdd = { nom: gameName, type: gameType };
       this.games.push(gameToAdd);
     }
     this.newGameForm.reset();
@@ -37,19 +43,12 @@ export class GamesComponent {
 
 
   public saveGame(i: number) : void {
-    const nameInput = document.getElementById("gameName") as HTMLInputElement;
+    const nomInput = document.getElementById("gameName") as HTMLInputElement;
     const typeInput = document.getElementById("gameType") as HTMLInputElement;
     if (!typeInput.value) {
       typeInput.value = typeInput.placeholder;
     }
-    const zoneInput = document.getElementById("gameZone") as HTMLInputElement;
-    if (!zoneInput.value) {
-      zoneInput.value = zoneInput.placeholder;
-    }
-    const dateInput = document.getElementById("gameDate") as HTMLInputElement;
-    const startInput = document.getElementById("gameStart") as HTMLInputElement;
-    const endInput = document.getElementById("gameEnd") as HTMLInputElement;
-    const editedGame = { name: nameInput.value, type: typeInput.value, zone: zoneInput.value, date: dateInput.value, start: startInput.value, end: endInput.value };
+    const editedGame = { nom: nomInput.value, type: typeInput.value };
     this.games[i] = editedGame;
   }
 
@@ -66,7 +65,7 @@ export class GamesComponent {
     this.isDesc = !this.isDesc; //change the direction
     this.column = property;
     let direction = this.isDesc ? 1 : -1;
-    if ( property == "name" || property == "type" || property == "zone")
+    if ( property == "nom" || property == "type")
     this.games.sort(function(a, b) {
       if (a[property] < b[property]) {
         return -1 * direction;

@@ -16,8 +16,8 @@
 <h2> Create a game </h2>
 <form [formGroup]="newGameForm" (ngSubmit)="onSubmit()" >
 
-    <label for="name">Name: </label>
-    <input id="name" type="text" formControlName="name">
+    <label for="nom">Name: </label>
+    <input id="nom" type="text" formControlName="nom">
   
     <label for="type"> Type: </label>
     <input id="type" type="text" formControlName="type">
@@ -30,25 +30,17 @@
 <table id="myTable" class="styled-table">
     <thead>
         <tr>
-            <th [ngClass]="{pointer: true, active:column=='name',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('name')"> Name </th>
+            <th [ngClass]="{pointer: true, active:column=='nom',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('nom')"> Name </th>
             <th [ngClass]="{pointer: true, active:column=='type',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('type')"> Type </th>
-            <th [ngClass]="{pointer: true, active:column=='zone',desc:isDesc, asc:!isDesc}" class="sortingHeader" (click)="sort('zone')"> Zone </th>
-            <th> Date </th>
-            <th> Start Hour </th>
-            <th> End Hour </th>
             <th> Actions </th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let game of games; let i = index">
-            <td *ngIf="enableEditIndex != i">{{ game.name }}</td>
+            <td *ngIf="enableEditIndex != i">{{ game.nom }}</td>
             <td *ngIf="enableEditIndex != i">{{ game.type }}</td>
-            <td *ngIf="enableEditIndex != i">{{ game.zone }}</td>
-            <td *ngIf="enableEditIndex != i">{{ game.date }}</td>
-            <td *ngIf="enableEditIndex != i">{{ game.start }}</td>
-            <td *ngIf="enableEditIndex != i">{{ game.end }}</td>
             <td *ngIf="enableEditIndex == i">
-                <input id="gameName" type="text" [value]="game.name" />
+                <input id="gameName" type="text" [value]="game.nom" />
             </td>
             <td *ngIf="enableEditIndex == i">
                 <input id="gameType" type="text" [placeholder]="game.type" list="listOfTypes">
@@ -60,30 +52,6 @@
                         <option value="initié">
                         <option value="expert">
                     </datalist>
-            </td>
-            <td *ngIf="enableEditIndex == i">
-                <input id="gameZone" type="text" [placeholder]="game.zone" list="listOfZones">
-                <!-- TODO : REMPLACER AVEC DONNEES BD -->
-                    <datalist id="listOfZones">
-                        <option value="Esplanade-Gauche 1, 2, 3">
-                        <option value="Esplanade-Centre 1, 2, 3, 4, 5">
-                        <option value="Esplanade-Droite 1, 2, 3, 4">
-                        <option value="Esplanade-Accueil">
-                        <option value="Antigone-Buvette">
-                        <option value="Antigone-Entrée 1, 2, 3, 4, 5">
-                        <option value="Antigone-Fond 1, 2">
-                        <option value="Antigone-Proto">
-                        <option value="Antigone-Loup-Garous">
-                    </datalist>
-            </td>
-            <td *ngIf="enableEditIndex == i">
-                <input id="gameDate" type="date" [value]="game.date" required pattern="\d{2}-\d{2}-\d{4}" />
-            </td>
-            <td *ngIf="enableEditIndex == i">
-                <input id="gameStart" type="time" [value]="game.start" />
-            </td>
-            <td *ngIf="enableEditIndex == i">
-                <input id="gameEnd" type="time" [value]="game.end" />
             </td>
             <td>
                 <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
