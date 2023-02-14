@@ -20,7 +20,15 @@
     <input id="nom" type="text" formControlName="nom">
   
     <label for="type"> Type: </label>
-    <input id="type" type="text" formControlName="type">
+    <input type="text" formControlName="type" list="listOfTypes">
+    <!-- TODO : REMPLACER AVEC DONNEES BD -->
+        <datalist id="listOfTypes">
+            <option value="enfant">
+            <option value="famille">
+            <option value="ambiance">
+            <option value="initié">
+            <option value="expert">
+        </datalist>
     
     <button type="submit" [disabled]="!newGameForm.valid">Submit</button>
 </form>
@@ -55,11 +63,11 @@
             </td>
             <td>
                 <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
-                <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveGame(i); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
+                <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveGame(game); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
                 <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod(i)">
                     edit
                 </button>
-                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeGame(i)">
+                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeGame(game)">
                     remove
                 </button>
             </td>

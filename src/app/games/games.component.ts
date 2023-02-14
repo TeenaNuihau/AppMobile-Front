@@ -28,7 +28,7 @@ export class GamesComponent {
 
   public getGamesList() {
     this.gamesService.getGames().subscribe(res => {
-      this.games = res as {nom: string, type: string}[];
+      this.games = res as Game[];
     })
   }
 
@@ -36,25 +36,29 @@ export class GamesComponent {
     const gameName = this.newGameForm.value.nom;
     const gameType = this.newGameForm.value.type;
     if (gameName != null && gameType != null) {
-      const gameToAdd = { nom: gameName, type: gameType };
-      this.games.push(gameToAdd);
+      const gameToAdd = { _id: "", nom: gameName, type: gameType };
+      this.gamesService.createGame(gameToAdd).subscribe(res => {
+        this.games.push(res as Game);
+      })
     }
     this.newGameForm.reset();
   }
 
 
-  public saveGame(i: number) : void {
+  public saveGame(game: Game) : void {
     const nomInput = document.getElementById("gameName") as HTMLInputElement;
     const typeInput = document.getElementById("gameType") as HTMLInputElement;
     if (!typeInput.value) {
       typeInput.value = typeInput.placeholder;
     }
-    const editedGame = { nom: nomInput.value, type: typeInput.value };
-    this.games[i] = editedGame;
+    const editedGame = { _id: game._id, nom: nomInput.value, type: typeInput.value };
+    this.gamesService.editGame(game._id, editedGame).subscribe();
+    this.games[this.games.indexOf(game)] = editedGame;
   }
 
-  public removeGame(i: number) : void {
-    this.games.splice(i, 1);
+  public removeGame(game: Game) : void {
+    this.gamesService.deleteGame(game._id).subscribe();
+    this.games.splice(this.games.indexOf(game), 1);
   }
 
   public enableEditMethod(i: number) {

@@ -5,6 +5,7 @@ import { AffectationsService } from '../services/affectations.service';
 import { GamesService } from '../services/games.service';
 import { VolunteersService } from '../services/volunteers.service';
 import { ZonesService } from '../services/zones.service';
+import { Volunteer } from '../volunteers/volunteer';
 
 @Component({
   selector: 'app-affectations',
@@ -41,10 +42,10 @@ export class AffectationsComponent {
       this.zones = res as {nom: string, jeux: [{nom: string, type: string}]}[];
     });
     this.gamesService.getGames().subscribe(res => {
-      this.games = res as {nom: string, type: string}[];
+      this.games = res as Game[];
     })
     this.volunteersService.getVolunteers().subscribe(res => {
-      this.volunteers = res as {prenom: string, nom: string, email: string}[];
+      this.volunteers = res as Volunteer[];
     })
   }
 

@@ -45,21 +45,21 @@
             <td *ngIf="enableEditIndex != i">{{ volunteer.nom }}</td>
             <td *ngIf="enableEditIndex != i">{{ volunteer.email }}</td>
             <td *ngIf="enableEditIndex == i">
-                <input id="volunteerprenom" type="text" [value]="volunteer.prenom" />
+                <input id="volunteerPrenom" type="text" [value]="volunteer.prenom" />
             </td>
             <td *ngIf="enableEditIndex == i">
-                <input id="volunteernom" type="text" [value]="volunteer.nom" />
+                <input id="volunteerNom" type="text" [value]="volunteer.nom" />
             </td>
             <td *ngIf="enableEditIndex == i">
                 <input id="volunteerEmail" type="text" [value]="volunteer.email" />
             </td>
             <td>
                 <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
-                <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveVolunteer(i); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
+                <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveVolunteer(volunteer); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
                 <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod(i)">
                     edit
                 </button>
-                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeVolunteer(i)">
+                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeVolunteer(volunteer)">
                     remove
                 </button>
             </td>

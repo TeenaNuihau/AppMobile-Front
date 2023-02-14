@@ -36,24 +36,28 @@ export class VolunteersComponent {
   public onSubmit(): void {
     const volunteerprenom = this.newVolunteerForm.value.prenom;
     const volunteernom = this.newVolunteerForm.value.nom;
-    const volunteerEmail = this.newVolunteerForm.value.email;
+    const volunteerEmail = this.newVolunteerForm.value.email; 
     if (volunteerprenom != null && volunteernom != null && volunteerEmail != null) {
-      const volunteerToAdd = { prenom: volunteerprenom, nom: volunteernom, email: volunteerEmail };
-      this.volunteers.push(volunteerToAdd);
+      const volunteerToAdd = { _id: "", prenom: volunteerprenom, nom: volunteernom, email: volunteerEmail };
+      this.volunteersService.createVolunteer(volunteerToAdd).subscribe(res => {
+        this.volunteers.push(res as Volunteer);
+      })
     }
     this.newVolunteerForm.reset();
   }
 
-  public saveVolunteer(i: number) : void {
-    const prenomInput = document.getElementById("volunteerprenom") as HTMLInputElement;
-    const nomInput = document.getElementById("volunteernom") as HTMLInputElement;
+  public saveVolunteer(volunteer: Volunteer) : void {
+    const prenomInput = document.getElementById("volunteerPrenom") as HTMLInputElement;
+    const nomInput = document.getElementById("volunteerNom") as HTMLInputElement;
     const emailInput = document.getElementById("volunteerEmail") as HTMLInputElement;
-    const editedVolunteer = new Volunteer(prenomInput.value, nomInput.value, emailInput.value);
-    this.volunteers[i] = editedVolunteer;
+    const editedVolunteer = new Volunteer(volunteer._id, prenomInput.value, nomInput.value, emailInput.value);
+    this.volunteersService.editVolunteer(volunteer._id, editedVolunteer).subscribe();
+    this.volunteers[this.volunteers.indexOf(volunteer)] = editedVolunteer;
   }
 
-  public removeVolunteer(i: number) : void {
-    this.volunteers.splice(i, 1);
+  public removeVolunteer(volunteer: Volunteer) : void {
+    this.volunteersService.deleteVolunteer(volunteer._id).subscribe();
+    this.volunteers.splice(this.volunteers.indexOf(volunteer), 1);
   }
 
   public enableEditMethod(i: number) {

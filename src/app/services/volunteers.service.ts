@@ -15,15 +15,23 @@ export class VolunteersService {
     return this.httpClient.get(this.endpoint, options);
   }
 
-  public deleteVolunteer(volunteer: any) {
-    return this.httpClient.delete(this.endpoint, volunteer);
+  public createVolunteer(volunteer: any) {
+    let options = {};
+    return this.httpClient.post(this.endpoint, volunteer, options);
   }
 
-  public editVolunteer(volunteer: any) {
-    return this.httpClient.patch(this.endpoint, volunteer);
+  public getVolunteer(id: string) {
+    let options = {};
+    return this.httpClient.get(`${this.endpoint}/${id}`, options);
   }
 
-  public addVolunteer(volunteer: any) {
-    return this.httpClient.post(this.endpoint, volunteer);
+  public deleteVolunteer(id: string) {
+    let options = {};
+    return this.httpClient.delete(`${this.endpoint}/${id}`, options);
+  }
+
+  public editVolunteer(id: string, volunteer: any) {
+    let options = {};
+    return this.httpClient.put(`${this.endpoint}/${id}`, volunteer, options);
   }
 }
