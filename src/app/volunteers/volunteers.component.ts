@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { VolunteersService } from '../services/volunteers.service';
+import { Volunteer } from './volunteer';
 
 @Component({
   selector: 'app-volunteers',
@@ -8,7 +9,7 @@ import { VolunteersService } from '../services/volunteers.service';
   styleUrls: ['./volunteers.component.css'],
 })
 export class VolunteersComponent {
-  public volunteers : {prenom: string, nom: string, email: string}[] = [];
+  public volunteers : Volunteer[] = [];
   public enableEdit : boolean = false;
   public enableEditIndex : number | null = null;
   public column: string = "prenom";
@@ -28,7 +29,7 @@ export class VolunteersComponent {
 
   public getVolonteersList() {
     this.volunteersService.getVolunteers().subscribe(res => {
-      this.volunteers = res as {prenom: string, nom: string, email: string}[];
+      this.volunteers = res as Volunteer[];
     })
   }
 
@@ -47,7 +48,7 @@ export class VolunteersComponent {
     const prenomInput = document.getElementById("volunteerprenom") as HTMLInputElement;
     const nomInput = document.getElementById("volunteernom") as HTMLInputElement;
     const emailInput = document.getElementById("volunteerEmail") as HTMLInputElement;
-    const editedVolunteer = { prenom: prenomInput.value, nom: nomInput.value, email: emailInput.value };
+    const editedVolunteer = new Volunteer(prenomInput.value, nomInput.value, emailInput.value);
     this.volunteers[i] = editedVolunteer;
   }
 

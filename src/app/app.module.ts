@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AffectationsComponent } from './affectations/affectations.component';
 import { AffectationsService } from './services/affectations.service';
 import { CommonModule } from '@angular/common';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CommonModule } from '@angular/common';
     HomeComponent,
     GamesComponent,
     VolunteersComponent,
-    AffectationsComponent
+    AffectationsComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

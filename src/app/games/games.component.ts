@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { GamesService } from '../services/games.service';
+import { Game } from './game';
 
 @Component({
   selector: 'app-games',
@@ -8,7 +9,7 @@ import { GamesService } from '../services/games.service';
   styleUrls: ['./games.component.css']
 })
 export class GamesComponent {
-  public games : {nom: string, type: string}[] = [];
+  public games : Game[] = [];
   public enableEdit : boolean = false;
   public enableEditIndex : number | null = null;
   public column: string = "nom";

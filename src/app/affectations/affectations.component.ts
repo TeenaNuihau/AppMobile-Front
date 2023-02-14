@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Game } from '../games/game';
 import { AffectationsService } from '../services/affectations.service';
 import { GamesService } from '../services/games.service';
 import { VolunteersService } from '../services/volunteers.service';
+import { ZonesService } from '../services/zones.service';
 
 @Component({
   selector: 'app-affectations',
@@ -11,8 +13,9 @@ import { VolunteersService } from '../services/volunteers.service';
 })
 export class AffectationsComponent {
   public affectations : {zone: string, date: string, start: string, end: string, game: string, volunteers: string[]}[] = [];
-  public games : {nom: string, type: string}[] = [];
+  public games : Game[] = [];
   public volunteers : {prenom: string, nom: string, email: string}[] = [];
+  public zones : {nom: string, jeux: [{nom: string, type: string}]}[] = [];
   public affectationForm = this.fb.group({
     zone: ['', Validators.required],
     date: ['', Validators.required],
@@ -28,11 +31,15 @@ export class AffectationsComponent {
     private affectationsService : AffectationsService,
     private gamesService : GamesService, 
     private volunteersService : VolunteersService,
+    private zonesService : ZonesService,
     private fb: FormBuilder
     ) {}
 
   ngOnInit() {
     this.affectations = this.affectationsService.getAffectations();
+    this.zonesService.getZones().subscribe(res => {
+      this.zones = res as {nom: string, jeux: [{nom: string, type: string}]}[];
+    });
     this.gamesService.getGames().subscribe(res => {
       this.games = res as {nom: string, type: string}[];
     })

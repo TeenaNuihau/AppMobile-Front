@@ -21,17 +21,8 @@
 
         <label for="zone">Zone: </label>
         <input id="zone" type="text" list="listOfZones" formControlName="zone">
-            <!-- TODO : REMPLACER AVEC DONNEES BD -->
             <datalist id="listOfZones">
-                <option value="Esplanade-Gauche 1, 2, 3">
-                <option value="Esplanade-Centre 1, 2, 3, 4, 5">
-                <option value="Esplanade-Droite 1, 2, 3, 4">
-                <option value="Esplanade-Accueil">
-                <option value="Antigone-Buvette">
-                <option value="Antigone-Entrée 1, 2, 3, 4, 5">
-                <option value="Antigone-Fond 1, 2">
-                <option value="Antigone-Proto">
-                <option value="Antigone-Loup-Garous">
+                <option *ngFor="let zone of zones">{{ zone.nom }}</option>
             </datalist>
     
         <label for="date">Date: </label>
