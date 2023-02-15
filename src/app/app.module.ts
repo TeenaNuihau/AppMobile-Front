@@ -15,6 +15,7 @@ import { AffectationsComponent } from './affectations/affectations.component';
 import { AffectationsService } from './services/affectations.service';
 import { CommonModule } from '@angular/common';
 import { EventsComponent } from './events/events.component';
+import { ZonesComponent } from './zones/zones.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EventsComponent } from './events/events.component';
     GamesComponent,
     VolunteersComponent,
     AffectationsComponent,
-    EventsComponent
+    EventsComponent,
+    ZonesComponent
   ],
   imports: [
     BrowserModule,

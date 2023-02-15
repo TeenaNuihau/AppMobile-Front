@@ -2,16 +2,18 @@ import { Volunteer } from '../volunteers/volunteer'
 import { Zone } from '../zones/zone';
 
 export class Event {
-    beginingDate: string;
-    endingDate: string;
-    zone: Zone;
-    benevoles: Volunteer[];
-  
-    constructor(beginingDate: string, endingDate: string, zone: Zone, benevoles: Volunteer[]) {
-      this.beginingDate = beginingDate;
-      this.endingDate = endingDate;
-      this.zone = zone;
-      this.benevoles = benevoles;
-    }
+  _id: string;
+  beginingdate: string;
+  endingdate: string;
+  zone: Zone;
+  benevoles: Volunteer[];
+
+  constructor(_id: string, beginingdate: string, endingdate: string, zone: Zone, benevoles: Volunteer[]) {
+    this._id = _id;
+    this.beginingdate = beginingdate;
+    this.endingdate = endingdate;
+    this.zone = zone;
+    this.benevoles = benevoles;
   }
+}
   

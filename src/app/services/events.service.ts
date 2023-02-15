@@ -13,4 +13,24 @@ export class EventsService {
     let options = {};
     return this.httpClient.get(this.endpoint, options);
   }
+
+  public createEvent(event: any) {
+    let options = {};
+    return this.httpClient.post(this.endpoint, event, options);
+  }
+
+  public getEvent(id: string) {
+    let options = {};
+    return this.httpClient.get(`${this.endpoint}/${id}`, options);
+  }
+
+  public deleteEvent(id: string) {
+    let options = {};
+    return this.httpClient.delete(`${this.endpoint}/${id}`, options);
+  }
+
+  public editEvent(id: string, event: any) {
+    let options = {};
+    return this.httpClient.put(`${this.endpoint}/${id}`, event, options);
+  }
 }
