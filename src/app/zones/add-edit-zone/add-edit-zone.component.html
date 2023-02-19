@@ -1,0 +1,23 @@
+<form [formGroup]="zoneForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" formControlName="name" />
+      <div *ngIf="name.touched && name.errors">
+        <div *ngIf="name.errors.required">Name is required.</div>
+      </div>
+    </div>
+
+    <div>
+      <label for="games">Games:</label>
+      <input type="text" formControlName="gameName" />
+      <button type="button" (click)="addGame()">Add game</button>
+      <ul>
+        <li *ngFor="let game of games.controls; let i = index">
+          <span>{{ game.value.name }}</span>
+          <button type="button" (click)="removeGame(i)">Remove</button>
+        </li>
+      </ul>
+    </div>
+
+    <button type="submit" [disabled]="zoneForm.invalid">Create zone</button>
+  </form>

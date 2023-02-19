@@ -16,6 +16,7 @@ import { AffectationsService } from './services/affectations.service';
 import { CommonModule } from '@angular/common';
 import { EventsComponent } from './events/events.component';
 import { ZonesComponent } from './zones/zones.component';
+import { AddEditZoneComponent } from './zones/add-edit-zone/add-edit-zone.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ZonesComponent } from './zones/zones.component';
     VolunteersComponent,
     AffectationsComponent,
     EventsComponent,
-    ZonesComponent
+    ZonesComponent,
+    AddEditZoneComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,10 @@ import { ZonesComponent } from './zones/zones.component';
       {
         path: 'affectations',
         component: AffectationsComponent
+      },
+      {
+        path: 'zones',
+        component: ZonesComponent
       },
     ])
   ],

@@ -59,6 +59,9 @@ export class EventsComponent {
     let eventZone: Zone = new Zone("", "", []);
     let eventVolunteers: Volunteer[] = [];
     if (eventBeginingdate != null && eventEndingdate != null && this.form.value.zone != null) {
+      this.zonesService.getZone(this.form.value.zone).subscribe(res => {
+        eventZone = res as Zone;
+      });
       this.list.forEach(volunteerId => {
         this.volunteersService.getVolunteer(volunteerId).subscribe(res => {
           eventVolunteers.push(res as Volunteer);

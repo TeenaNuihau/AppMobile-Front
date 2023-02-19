@@ -3,12 +3,12 @@ import { Game } from "../games/game";
 export class Zone {
   _id: string;
   nom: string;
-  games: Game[];
+  jeux: Game[];
 
-  constructor(_id: string, nom: string, games: Game[]) {
+  constructor(_id: string, nom: string, games: any[]) {
     this._id = _id;
     this.nom = nom;
-    this.games = games;
+    this.jeux = games as Game[];
   }
 }
   
