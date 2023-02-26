@@ -1,23 +1,26 @@
-<form [formGroup]="zoneForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Name:</label>
-      <input type="text" formControlName="name" />
-      <div *ngIf="name.touched && name.errors">
-        <div *ngIf="name.errors.required">Name is required.</div>
-      </div>
-    </div>
+<h2 mat-dialog-title>Edit Zone</h2>
+<form #zoneForm="ngForm" (ngSubmit)="onSubmit()">
+  <label for="zone-name">Zone Name:</label>
+  <input matInput name="nom" [(ngModel)]="zone.nom" required>
 
-    <div>
-      <label for="games">Games:</label>
-      <input type="text" formControlName="gameName" />
-      <button type="button" (click)="addGame()">Add game</button>
-      <ul>
-        <li *ngFor="let game of games.controls; let i = index">
-          <span>{{ game.value.name }}</span>
-          <button type="button" (click)="removeGame(i)">Remove</button>
-        </li>
-      </ul>
-    </div>
+  <label for="game-select">Select a game:</label>
+<input type="text" id="game-select" list="game-options" (change)="onGameSelected($event)">
+<datalist id="game-options">
+  <option *ngFor="let game of games" [value]="game.nom">{{game.nom}}</option>
+</datalist>
 
-    <button type="submit" [disabled]="zoneForm.invalid">Create zone</button>
-  </form>
+<p>Selected games:</p>
+<ul>
+  <li *ngFor="let gameId of selectedGameIds">{{ getGameById(gameId)?.nom }}
+    <button mat-icon-button (click)="removeGame(gameId)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </li>
+</ul>
+
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" [disabled]="zoneForm.invalid">Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

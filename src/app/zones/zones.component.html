@@ -3,13 +3,13 @@
         <a routerLink="/"> Home </a>
     </li>
     <li>
+        <a routerLink="/events"> Events </a>
+    </li>
+    <li>
         <a routerLink="/games"> Games </a>
     </li>
     <li>
         <a routerLink="/volunteers"> Volunteers </a>
-    </li>
-    <li>
-        <a routerLink="/affectations"> Planning </a>
     </li>
     <li>
         <a class="active" routerLink="/zones"> Zones </a>
@@ -23,12 +23,22 @@
         <tr>
             <th> Name </th>
             <th> Games </th>
+            <th> Actions </th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let zone of zones">
+        <tr *ngFor="let zone of zones; let i = index">
             <td>{{ zone.nom }}</td>
-            <td><p>{{ formattedGameList }}</p></td>
+            <td><p>{{ getFormattedGameListForZone(zone) }}</p></td>
+            <td>
+                
+                <button class="table-row-action edit-action" (click)="editZone(zone)">
+                    edit
+                </button>
+                <button class="table-row-action remove-action" (click)="removeZone(zone)">
+                    remove
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

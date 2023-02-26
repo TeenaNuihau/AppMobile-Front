@@ -1,1 +1,38 @@
-<p>events works!</p>
+<ul class="navbar">
+    <li>
+        <a routerLink="/"> Home </a>
+    </li>
+    <li>
+        <a class="active" routerLink="/events"> Events </a>
+    </li>
+    <li>
+        <a routerLink="/games"> Games </a>
+    </li>
+    <li>
+        <a routerLink="/volunteers"> Volunteers </a>
+    </li>
+    <li>
+        <a routerLink="/zones"> Zones </a>
+    </li>
+</ul>
+
+<h2> List of events </h2>
+
+<table id="myTable" class="styled-table">
+    <thead>
+        <tr>
+            <th> Begining Date </th>
+            <th> Ending Date </th>
+            <th> Zone </th>
+            <th> Volunteers </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let event of events">
+            <td>{{ event.beginingdate }}</td>
+            <td>{{ event.beginingdate }}</td>
+            <td>{{ event.zone.nom }}</td>
+            <td><p>{{ getFormattedVolunteerListForZone(event) }}</p></td>
+        </tr>
+    </tbody>
+</table>

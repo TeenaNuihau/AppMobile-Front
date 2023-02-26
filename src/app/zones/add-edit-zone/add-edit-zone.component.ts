@@ -1,52 +1,88 @@
-import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Zone } from '../zone';
+import { ZonesService } from '../../services/zones.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Game } from '../../games/game';
 import { GamesService } from '../../services/games.service';
-import { ZonesService } from '../../services/zones.service';
-import { Zone } from '../zone';
+
+export interface DialogData {
+  zoneId: string;
+}
+export interface ZoneDialogData extends DialogData {
+  zone: Zone;
+}
 
 @Component({
-  selector: 'app-zone-form',
-  template: './add-edit-zone.component.html',
+  selector: 'app-add-edit-zone',
+  templateUrl: './add-edit-zone.component.html',
   styleUrls: ['./add-edit-zone.component.css']
 })
 export class AddEditZoneComponent {
-  zoneForm = this.fb.group({
-    name: ['', Validators.required],
-    games: this.fb.array([]),
-    gameName: '',
-  });
-  public list: string[] = [];
-  public selectedZone: string | undefined;
+  @Input() zone!: Zone;
+  public games!: Game[];
+  public gamesInput!: string;
+  public selectedGameIds: string[] = [];
 
-  constructor(private fb: FormBuilder, private zonesService: ZonesService, private gamesService: GamesService) {
-    
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: ZoneDialogData,
+    private gameService: GamesService,
+    private zoneService: ZonesService,
+    public dialogRef: MatDialogRef<AddEditZoneComponent>
+    ) {}
+
+  ngOnInit(): void {
+    // Retrieve the zone object from the data object
+    this.zone = this.data.zone;
+    this.gameService.getGames().subscribe(res => {
+      this.games = res as Game[];
+    })
+    this.zone.jeux.forEach(jeu => {
+      this.selectedGameIds.push(jeu._id);
+    });
   }
 
-  public onSubmit(): void {
-    const zoneName = this.zoneForm.value.name;
-    const zoneGames: Game[] = [];
-    if (zoneName != null) {
-      this.list.forEach(gameId => {
-        this.gamesService.getGame(gameId).subscribe(res => {
-          zoneGames.push(res as Game);
-        })
-      });
-      const newZone = { _id: "", nom: zoneName, games: zoneGames };
-      this.zonesService.createZone(newZone).subscribe();
+  public onGameSelected(event: any) {
+    const selectedGame = this.games.find(game => game.nom === event.target.value);
+    if (selectedGame && !this.selectedGameIds.includes(selectedGame._id)) {
+      this.selectedGameIds.push(selectedGame._id);
     }
-    this.zoneForm.reset();
-    this.list = [];
+    event.target.value = '';
   }
 
-  public addToList() {
-    if (this.selectedZone && !this.list.includes(this.selectedZone)) {
-      this.list.push(this.selectedZone);
-      this.zoneForm.patchValue({ gameName: '' });
+  public getGameById(gameId: string): Game | undefined {
+    return this.games.find(game => game._id === gameId);
+  }
+  
+  public removeGame(gameId: string) {
+    const index = this.selectedGameIds.indexOf(gameId);
+    if (index >= 0) {
+      this.selectedGameIds.splice(index, 1);
     }
   }
   
-  public removeGame(game: string) {
-    this.list.splice(this.list.indexOf(game), 1);
+
+  public onSubmit(): void {
+    // create an array of Game objects from the selected game ids
+    const selectedGames = this.selectedGameIds.map(id => {
+      const game = this.games.find(game => game._id === id);
+      return game ? {...game} : null;
+    }).filter(game => game !== null);
+  
+    let gamesToAdd: Game[] = [];
+    selectedGames.forEach(game => {
+      gamesToAdd.push(new Game(game!._id, game!.nom, game!.type));
+    });
+    // assign the new array to the zone's jeux property
+    this.zone.jeux = gamesToAdd;
+  
+    // call the editZone method to save the changes
+    this.zoneService.editZone(this.zone._id, this.zone).subscribe(res => {
+      console.log('Zone updated successfully!');
+      this.dialogRef.close();
+    });
   }
+  
 }
