@@ -1,7 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DialogPosition, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ZonesService } from '../services/zones.service';
 import { AddEditZoneComponent } from './add-edit-zone/add-edit-zone.component';
+import { AddZoneComponent } from './add-zone/add-zone.component';
 import { Zone } from './zone';
 
 @Component({
@@ -15,7 +18,9 @@ export class ZonesComponent implements OnInit {
 
   constructor(
     private zonesService: ZonesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +50,25 @@ export class ZonesComponent implements OnInit {
       transform: 'translate(-50%, -50%)'
     } as DialogPosition;
     this.dialog.open(AddEditZoneComponent, dialogConfig);
+  }
+
+  public createZone(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '600px';
+    dialogConfig.disableClose = true;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.position = {
+      left: 'calc(50% - 250px)',
+      top: 'calc(30% - 250px)',
+      transform: 'translate(-50%, -50%)'
+    } as DialogPosition;
+    const dialogRef = this.dialog.open(AddZoneComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      // refresh the current page
+      this.location.replaceState(this.router.url);
+      window.location.reload();
+    });
+    
   }
   
 }

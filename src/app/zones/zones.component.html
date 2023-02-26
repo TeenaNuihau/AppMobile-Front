@@ -18,6 +18,8 @@
 
 <h2> List of zones </h2>
 
+<button type="button" (click)="createZone()"> Create a new zone </button>
+
 <table id="myTable" class="styled-table">
     <thead>
         <tr>
@@ -29,9 +31,8 @@
     <tbody>
         <tr *ngFor="let zone of zones; let i = index">
             <td>{{ zone.nom }}</td>
-            <td><p>{{ getFormattedGameListForZone(zone) }}</p></td>
+            <td>{{ getFormattedGameListForZone(zone) }}</td>
             <td>
-                
                 <button class="table-row-action edit-action" (click)="editZone(zone)">
                     edit
                 </button>

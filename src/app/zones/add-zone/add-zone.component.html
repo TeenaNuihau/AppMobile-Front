@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Edit Zone</h2>
 <form #zoneForm="ngForm" (ngSubmit)="onSubmit()">
   <label for="zone-name">Zone Name : </label>
-  <input matInput name="nom" [(ngModel)]="zone.nom" required>
+  <input matInput name="nom" required #nomInput>
 
   <label for="game-select">Select a game:</label>
 <input type="text" id="game-select" list="game-options" (change)="onGameSelected($event)">

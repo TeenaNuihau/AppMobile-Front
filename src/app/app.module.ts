@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { AddZoneComponent } from './zones/add-zone/add-zone.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatIconModule } from '@angular/material/icon';
     EventsComponent,
     ZonesComponent,
     AddEditZoneComponent,
-    AddEditEventComponent
+    AddEditEventComponent,
+    AddZoneComponent
   ],
   imports: [
     BrowserModule,
