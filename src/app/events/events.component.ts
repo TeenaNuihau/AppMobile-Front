@@ -1,6 +1,9 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { Game } from '../games/game';
+import { DialogPosition, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { EventsService } from '../services/events.service';
+import { AddEventComponent } from './add-event/add-event.component';
 import { Event } from './event';
 
 @Component({
@@ -12,7 +15,10 @@ export class EventsComponent {
   public events : Event[] = [];
 
   constructor(
-    private eventService: EventsService
+    private eventService: EventsService,
+    private dialog: MatDialog,
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,5 +34,28 @@ export class EventsComponent {
 
   public getFormattedVolunteerListForZone(event: Event): string {
     return event.benevoles.map(benevole => benevole.nom + " " + benevole.prenom).join(' - ');
+  }
+
+  public editEvent(event: Event) {
+
+  }
+
+  public createEvent(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '600px';
+    dialogConfig.disableClose = true;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.position = {
+      left: 'calc(50% - 250px)',
+      top: 'calc(30% - 250px)',
+      transform: 'translate(-50%, -50%)'
+    } as DialogPosition;
+    const dialogRef = this.dialog.open(AddEventComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      // refresh the current page
+      this.location.replaceState(this.router.url);
+      window.location.reload();
+    });
+    
   }
 }

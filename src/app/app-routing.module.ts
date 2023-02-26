@@ -6,7 +6,6 @@ import { VolunteersComponent } from './volunteers/volunteers.component';
 import { EventsComponent } from './events/events.component';
 import { ZonesComponent } from './zones/zones.component';
 import { AddEditZoneComponent } from './zones/add-edit-zone/add-edit-zone.component';
-import { AddEditEventComponent } from './events/add-edit-event/add-edit-event.component';
 
 const routes: Routes = [
   { 
@@ -28,30 +27,10 @@ const routes: Routes = [
   {
     path: 'zones',
     component: ZonesComponent,
-    children: [
-      { 
-        path: 'add-edit-zone/:id', 
-        component: AddEditZoneComponent 
-      },
-      { 
-        path: 'add-edit-zone', 
-        component: AddEditZoneComponent 
-      },
-    ],
   },
   {
     path: 'events',
     component: EventsComponent,
-    children: [
-      { 
-        path: 'add-edit-event', 
-        component: AddEditEventComponent 
-      },
-      { 
-        path: 'add-edit-event/:id', 
-        component: AddEditEventComponent 
-      },
-    ],
   },
 ];
 

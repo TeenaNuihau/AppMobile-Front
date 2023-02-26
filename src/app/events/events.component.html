@@ -17,6 +17,7 @@
 </ul>
 
 <h2> List of events </h2>
+<button type="button" (click)="createEvent()"> Create a new event </button>
 
 <table id="myTable" class="styled-table">
     <thead>
@@ -25,14 +26,24 @@
             <th> Ending Date </th>
             <th> Zone </th>
             <th> Volunteers </th>
+            <th> Actions </th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let event of events">
             <td>{{ event.beginingdate }}</td>
             <td>{{ event.beginingdate }}</td>
-            <td>{{ event.zone.nom }}</td>
-            <td><p>{{ getFormattedVolunteerListForZone(event) }}</p></td>
+            <td>
+                <div *ngIf="event.zone">{{ event.zone.nom }}</div>
+            </td>
+            <td>
+                <div *ngIf="event.benevoles.length > 0">{{ getFormattedVolunteerListForZone(event) }}</div>
+            </td>
+            <td>
+                <button class="table-row-action edit-action" (click)="editEvent(event)">
+                    edit
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

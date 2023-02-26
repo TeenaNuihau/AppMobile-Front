@@ -17,13 +17,14 @@ import { VolunteersComponent } from './volunteers/volunteers.component';
 import { EventsComponent } from './events/events.component';
 import { ZonesComponent } from './zones/zones.component';
 import { AddEditZoneComponent } from './zones/add-edit-zone/add-edit-zone.component';
-import { AddEditEventComponent } from './events/add-edit-event/add-edit-event.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { AddZoneComponent } from './zones/add-zone/add-zone.component';
+import { AddEventComponent } from './events/add-event/add-event.component';
+import { EditEventComponent } from './events/edit-event/edit-event.component';
 
 
 @NgModule({
@@ -35,8 +36,9 @@ import { AddZoneComponent } from './zones/add-zone/add-zone.component';
     EventsComponent,
     ZonesComponent,
     AddEditZoneComponent,
-    AddEditEventComponent,
-    AddZoneComponent
+    AddZoneComponent,
+    AddEventComponent,
+    EditEventComponent
   ],
   imports: [
     BrowserModule,
