@@ -1,1 +1,38 @@
-<p>edit-event works!</p>
+<h2 mat-dialog-title>Edit the event</h2>
+<form #eventForm="ngForm" (ngSubmit)="onSubmit()">
+
+  <label for="event-startignHour"> Start Hour : </label>
+  <input matInput type="date" name="startingDate" required #startingHourInput>
+
+  <label for="event-endingHour"> End Hour : </label>
+  <input matInput type="date" name="endingHour" required #endingHourInput>
+
+    <p>
+  <label for="zone-select"> Select a zone : </label>
+  <select name="zoneSelect" #zoneSelectInput [(ngModel)]="selectedZoneId">
+    <option *ngFor="let zone of zones" [value]="zone._id">{{ zone.nom }}</option>
+  </select>
+  
+   
+  <label for="volunteer-select"> Select a volunteer : </label>
+    <input type="text" id="volunteer-select" list="volunteer-options" (change)="onVolunteerSelected($event)">
+    <datalist id="volunteer-options">
+    <option *ngFor="let volunteer of volunteers" [value]="volunteer.nom + ' ' + volunteer.prenom">{{volunteer.nom + " " + volunteer.prenom}}</option>
+    </datalist>
+    </p>
+
+<p> Selected volunteers : </p>
+<ul>
+  <li *ngFor="let volunteerId of selectedVolunteerIds">{{ getVolunteerById(volunteerId)?.nom + " " + getVolunteerById(volunteerId)?.prenom }}
+    <button mat-icon-button (click)="removeVolunteer(volunteerId)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </li>
+</ul>
+
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" [disabled]="eventForm.invalid">Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

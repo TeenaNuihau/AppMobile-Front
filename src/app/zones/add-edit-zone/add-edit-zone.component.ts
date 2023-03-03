@@ -1,6 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Inject, Input } from '@angular/core';
 import { Zone } from '../zone';
 import { ZonesService } from '../../services/zones.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';

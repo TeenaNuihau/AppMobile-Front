@@ -13,14 +13,15 @@ import { Event } from '../event';
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent {
-  public event: Event = new Event("", "", "", new Zone("", "", []), []);
+  public event: Event = new Event(new Date, new Date, new Zone("", "", []), []);
   public zones!: Zone[];
   public volunteers!: Volunteer[];
   public volunteersInput!: string;
   public selectedVolunteerIds: string[] = [];
   public selectedZoneId: string = "";
   @ViewChild('zoneSelectInput') zoneInput!: ElementRef<HTMLSelectElement>;
-
+  @ViewChild('startingHourInput') beginingdateInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('endingHourInput') endingdateInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private volunteerService: VolunteersService,
@@ -32,13 +33,9 @@ export class AddEventComponent {
   ngOnInit(): void {
     this.volunteerService.getVolunteers().subscribe(res => {
       this.volunteers = res as Volunteer[];
-      console.log(res);
-      
     })
     this.zoneService.getZones().subscribe(res => {
       this.zones = res as Zone[];
-      console.log(res);
-      
     })
   }
 
@@ -76,6 +73,9 @@ export class AddEventComponent {
     // assign the new array to the event's benevole property
     this.event.benevoles = volunteersToAdd;
     this.event.zone = this.zones.find(zone => zone._id === this.zoneInput.nativeElement.value)!;
+
+    this.event.beginingdate = new Date(this.beginingdateInput.nativeElement.value);
+    this.event.endingdate = new Date(this.endingdateInput.nativeElement.value);
 
     // call the createZone method to save the changes
     this.eventService.createEvent(this.event).subscribe(res => {
