@@ -22,8 +22,7 @@
 <table id="myTable" class="styled-table">
     <thead>
         <tr>
-            <th> Begining Date </th>
-            <th> Ending Date </th>
+            <th> Dates </th>
             <th> Zone </th>
             <th> Volunteers </th>
             <th> Actions </th>
@@ -31,8 +30,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let event of events">
-            <td>{{ event.beginingdate }}</td>
-            <td>{{ event.beginingdate }}</td>
+            <td>{{ "du " + getFormattedDate(event.beginingdate) + " au " + getFormattedDate(event.endingdate) }}</td>
             <td>
                 <div *ngIf="event.zone">{{ event.zone.nom }}</div>
             </td>
@@ -42,6 +40,9 @@
             <td>
                 <button class="table-row-action edit-action" (click)="editEvent(event)">
                     edit
+                </button>
+                <button class="table-row-action remove-action" (click)="removeEvent(event)">
+                    remove
                 </button>
             </td>
         </tr>

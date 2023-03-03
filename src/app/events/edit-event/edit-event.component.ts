@@ -1,18 +1,27 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, ElementRef, Inject, Input, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventsService } from '../../services/events.service';
 import { VolunteersService } from '../../services/volunteers.service';
 import { ZonesService } from '../../services/zones.service';
 import { Volunteer } from '../../volunteers/volunteer';
+import { ZoneDialogData } from '../../zones/add-edit-zone/add-edit-zone.component';
 import { Zone } from '../../zones/zone';
 import { AddEventComponent } from '../add-event/add-event.component';
 import { Event } from '../event';
+
+export interface DialogData {
+  eventId: string;
+}
+export interface EventDialogData extends DialogData {
+  event: Event;
+}
 
 @Component({
   selector: 'app-edit-event',
   templateUrl: './edit-event.component.html',
   styleUrls: ['./edit-event.component.css']
 })
+
 export class EditEventComponent {
   @Input() public event!: Event;
   public zones!: Zone[];
@@ -25,6 +34,7 @@ export class EditEventComponent {
   @ViewChild('endingHourInput') endingdateInput!: ElementRef<HTMLInputElement>;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: EventDialogData,
     private volunteerService: VolunteersService,
     private zoneService: ZonesService,
     private eventService: EventsService,
@@ -32,6 +42,7 @@ export class EditEventComponent {
     ) {}
 
   ngOnInit(): void {
+    this.event = this.data.event;
     this.volunteerService.getVolunteers().subscribe(res => {
       this.volunteers = res as Volunteer[];
     })
@@ -42,9 +53,6 @@ export class EditEventComponent {
       this.selectedVolunteerIds.push(benevole._id);
     });
     this.selectedZoneId = this.event.zone._id;
-
-    console.log(this.event);
-    
   }
 
   public onVolunteerSelected(event: any) {

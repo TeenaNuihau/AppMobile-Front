@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { formatDate, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { DialogPosition, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -29,13 +29,21 @@ export class EventsComponent {
   }
 
   public removeEvent(event: Event) : void {
-    // this.eventService.deleteEvent(event._id).subscribe();
+    this.eventService.deleteEvent(event._id).subscribe();
     this.events.splice(this.events.indexOf(event), 1);
   }
 
   public getFormattedVolunteerListForZone(event: Event): string {
     return event.benevoles.map(benevole => benevole.nom + " " + benevole.prenom).join(' - ');
   }
+
+  public getFormattedDate(date: Date): string {
+    const newDate = new Date(date);
+    return ("0" + (newDate.getDate())).slice(-2) + '/' 
+       + ("0" + (newDate.getMonth() + 1)).slice(-2) + '/' 
+       + (newDate.getFullYear().toString())
+       + ' à ' + newDate.toTimeString().slice(0,5);
+}
 
   public editEvent(event: Event) {
     const dialogConfig = new MatDialogConfig();

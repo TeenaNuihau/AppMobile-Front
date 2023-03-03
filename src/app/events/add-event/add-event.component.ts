@@ -13,7 +13,7 @@ import { Event } from '../event';
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent {
-  public event: Event = new Event(new Date, new Date, new Zone("", "", []), []);
+  public event: Event = new Event("", new Date, new Date, new Zone("", "", []), []);
   public zones!: Zone[];
   public volunteers!: Volunteer[];
   public volunteersInput!: string;
