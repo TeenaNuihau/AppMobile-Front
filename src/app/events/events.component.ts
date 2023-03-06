@@ -42,7 +42,7 @@ export class EventsComponent {
     return ("0" + (newDate.getDate())).slice(-2) + '/' 
        + ("0" + (newDate.getMonth() + 1)).slice(-2) + '/' 
        + (newDate.getFullYear().toString())
-       + ' à ' + newDate.toTimeString().slice(0,5);
+       + ' at ' + newDate.toTimeString().slice(0,5);
 }
 
   public editEvent(event: Event) {

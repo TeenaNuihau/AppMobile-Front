@@ -34,10 +34,10 @@
             <td>{{ getFormattedGameListForZone(zone) }}</td>
             <td>
                 <button class="table-row-action edit-action" (click)="editZone(zone)">
-                    edit
+                    <mat-icon>edit</mat-icon>
                 </button>
                 <button class="table-row-action remove-action" (click)="removeZone(zone)">
-                    remove
+                    <mat-icon>delete</mat-icon>
                 </button>
             </td>
         </tr>

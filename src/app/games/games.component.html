@@ -65,13 +65,13 @@
                     </datalist>
             </td>
             <td>
-                <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn" ng-click="cancel()">Cancel</button>
+                <button *ngIf="enableEdit && enableEditIndex == i" (click)="enableEdit=false; enableEditIndex=null" class="btn page-secondary-action-btn cancel-button" ng-click="cancel()">Cancel</button>
                 <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveGame(game); enableEdit=false; enableEditIndex=null" type="submit">Save</button>
                 <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod(i)">
-                    edit
+                    <mat-icon>edit</mat-icon>
                 </button>
-                <button class="table-row-action edit-action" *ngIf="!enableEdit" (click)="removeGame(game)">
-                    remove
+                <button class="table-row-action remove-action" *ngIf="!enableEdit" (click)="removeGame(game)">
+                    <mat-icon>delete</mat-icon>
                 </button>
             </td>
         </tr>
