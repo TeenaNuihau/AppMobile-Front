@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ZonesService {
 
-  private endpoint: string = 'http://localhost:3000/zone'
+  private endpoint: string = 'https://fine-pink-lab-coat.cyclic.app/zone'
 
   constructor(private httpClient: HttpClient) { }
 

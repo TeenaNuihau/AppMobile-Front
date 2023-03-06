@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http'
 })
 export class GamesService {
 
-  private endpoint: string = 'http://localhost:3000/jeux'
+  private endpoint: string = 'https://fine-pink-lab-coat.cyclic.app/jeux'
 
   constructor(private httpClient: HttpClient) { }
 

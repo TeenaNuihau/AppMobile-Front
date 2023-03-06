@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class VolunteersService {
 
-  private endpoint: string = 'http://localhost:3000/benevole'
+  private endpoint: string = 'https://fine-pink-lab-coat.cyclic.app/benevole'
 
   constructor(private httpClient: HttpClient) { }
 

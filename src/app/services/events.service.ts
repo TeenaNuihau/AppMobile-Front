@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EventsService {
-  private endpoint: string = 'http://localhost:3000/event'
+  private endpoint: string = 'https://fine-pink-lab-coat.cyclic.app/event'
 
   constructor(private httpClient: HttpClient) { }
 
