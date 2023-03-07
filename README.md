@@ -1,27 +1,31 @@
-# FrontApp
+# FrontApp AWI - Festivals
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
+Ce projet a été réalisé par TEENA Nuihau et TOROSJAN Johan dans le cadre du projet AWI de l'année 2022-2023.
 
-## Development server
+## Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Le projet de gestion du festival de jeux permet de créer, modifier et supprimer des événements, des zones, des bénévoles et des jeux sur le site.
 
-## Code scaffolding
+## Fonctionnalités
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Les fonctionnalités principales de l'application sont les suivantes :
 
-## Build
+Gestion des événements : créer, modifier et supprimer des événements avec des informations telles que les dates de début et de fin, les zones et les bénévoles assignés.
+Gestion des zones : créer, modifier et supprimer des zones où les jeux sont organisés, avec des informations telles que le nom de la zone et la liste des jeux disponibles.
+Gestion des bénévoles : créer, modifier et supprimer des bénévoles qui peuvent être assignés à des événements, avec des informations telles que le nom, le prénom et l'adresse e-mail.
+Gestion des jeux : créer, modifier et supprimer des jeux qui sont disponibles dans les différentes zones, avec des informations telles que le nom et le type.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Adresse du site
 
-## Running unit tests
+Voici l'adresse du site : `https://festival-front-21c76.web.app/`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Technologies utilisées
 
-## Running end-to-end tests
+Le projet utilise les technologies suivantes :
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Node.js : environnement d'exécution JavaScript côté serveur
+Express.js : framework web pour Node.js
+MongoDB : base de données NoSQL
+Mongoose : bibliothèque pour la modélisation des données dans MongoDB
+TypeScript : langage de programmation pour les applications JavaScript côté serveur
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
