@@ -24,7 +24,7 @@ Voici l'adresse du site : `https://festival-front-21c76.web.app/`
 Le projet utilise les technologies suivantes :
 
 Node.js : environnement d'exécution JavaScript côté serveur
-Express.js : framework web pour Node.js
+Nestjs : framework web pour Node.js
 MongoDB : base de données NoSQL
 Mongoose : bibliothèque pour la modélisation des données dans MongoDB
 TypeScript : langage de programmation pour les applications JavaScript côté serveur
