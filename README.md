@@ -28,3 +28,7 @@ Nestjs : framework web pour Node.js
 MongoDB : base de données NoSQL
 Mongoose : bibliothèque pour la modélisation des données dans MongoDB
 TypeScript : langage de programmation pour les applications JavaScript côté serveur
+
+## Ressources externes
+
+Lien GitHub vers l'API : `https://github.com/JohanTorosjan/festival-api`
